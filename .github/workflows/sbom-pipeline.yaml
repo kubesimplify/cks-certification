@@ -1,0 +1,30 @@
+name: Generate SBOM
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  generate-sbom:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Install Trivy
+        run: |
+          curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh
+          sudo mv bin/trivy /usr/local/bin
+
+      - name: Generate SBOM
+        run: |
+          IMAGE="registry.k8s.io/kube-apiserver:v1.32.0"
+          trivy image --format cyclonedx --output sbom-${{ github.sha }}.json $IMAGE
+
+      - name: Upload SBOM Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: sbom
+          path: sbom-${{ github.sha }}.json
+
