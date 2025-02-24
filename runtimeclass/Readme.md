@@ -4,7 +4,7 @@ curl -fsSL https://developer.fermyon.com/downloads/install.sh | bash
 sudo mv spin /usr/local/bin/
 
 ```
-#3 Project Scaffolding
+## Project Scaffolding
 ```
 spin kube scaffold --from ghcr.io/spinkube/containerd-shim-spin/examples/spin-rust-hello:v0.13.0 > hello-world.yaml
 ```
