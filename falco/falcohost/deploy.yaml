@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demo3
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: demo3
+  template:
+    metadata:
+      labels:
+        app: demo3
+    spec:
+      nodeName: cplane-01
+      containers:
+      - name: busybox
+        image: busybox
+        command: ["/bin/sh", "-c", "while true; do cat /dev/mem; sleep 10; done"]
+        securityContext:
+          privileged: true

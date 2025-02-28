@@ -1,0 +1,10 @@
+- list: memoryfile
+  items: [/dev/mem]
+- rule: mem
+  desc: mem
+  condition: >
+    fd.name=memoryfile
+  output: >
+    Shell (%fd.name,%container.id)
+  priority: WARNING
+  tags: [security]
