@@ -10,7 +10,7 @@ apt install -y clang llvm
 ```
 ### Run shell inside a container 
 ```
-docker run --name ubuntu bash --rm -i -t ubuntu bash
+docker run -it --name ubuntu ubuntu bash
 ```
 ### Change Falco Rules 
 `output: "[%evt.time][%container.id] [%container.name]"`
